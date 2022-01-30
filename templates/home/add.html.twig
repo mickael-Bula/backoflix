@@ -21,7 +21,34 @@
 
             <div class="col-lg-6">
                 {{ form_row(form.title) }}
-                {{ form_widget(form.save, { 'label': 'Ajouter' }) }}
+
+                <div class="d-inline-flex">
+                {% if movie is defined and movie is not null %}
+
+                    <div class="pe-4"><button class="btn btn-success" value="1">Enregistrer</button></div>
+                    <div><a href="{{ path('add') }}"><button class="btn btn-danger">Annuler</button></a></div>
+
+                {% else %}
+
+                    <div><a href="{{ path('save') }}"><button class="btn btn-primary">Rechercher</button></a></div>
+
+                    {# <div class="m-2">{{ form_widget(form.search, { 'label': 'Rechercher' }) }}</div>
+                    <div class="m-2" style="display: none">{{ form_widget(form.save, { 'label': 'Annuler' }) }}</div>
+                    <div class="m-2" style="display: none">{{ form_widget(form.cancel, { 'label': 'Annuler' }) }}</div> #}
+                {% endif %}
+                </div>
+
+                {# <div class="d-inline-flex">
+                {% if movie is defined and movie is not null %}
+                <div class="m-2" style="display: none">{{ form_widget(form.search, { 'label': 'Enregistrer' }) }}</div>
+                <div class="m-2">{{ form_widget(form.save, { 'label': 'Enregistrer' }) }}</div>
+                <div class="m-2">{{ form_widget(form.cancel, { 'label': 'Annuler' }) }}</div>
+                {% else %}
+                    <div class="m-2">{{ form_widget(form.search, { 'label': 'Rechercher' }) }}</div>
+                    <div class="m-2" style="display: none">{{ form_widget(form.save, { 'label': 'Annuler' }) }}</div>
+                    <div class="m-2" style="display: none">{{ form_widget(form.cancel, { 'label': 'Annuler' }) }}</div>
+                {% endif %}
+                </div> #}
             </div>
 
             {{ form_end(form) }}

@@ -55,11 +55,16 @@ class HomeController extends AbstractController
                     // TODO renvoyer un message pour signaler que le titre n'a pas été trouvé (utiliser la session ?)
                     return new Response('erreur lors de la soumission du titre');
                 }
-                // TODO enregistrer les données en BDD
+                // on met l'objet Movie en session (l'enregistrement est différé)
                 
                 return $this->renderForm('home/add.html.twig', compact('form', 'movie'));
             }
         }
         return $this->renderForm('home/add.html.twig', compact('form'));
+    }
+
+    public function save()
+    {
+        // si on arrive ici c'est que l'on veut enregistrer le film dans la session
     }
 }

@@ -5,7 +5,7 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\{ SubmitType, TextType };
+use Symfony\Component\Form\Extension\Core\Type\{ButtonType, SubmitType, TextType };
 
 class VideoType extends AbstractType
 {
@@ -19,7 +19,9 @@ class VideoType extends AbstractType
                 'placeholder' => 'saisissez un titre en anglais'
             ]
         ])
-        ->add('save', SubmitType::class)
+        // ->add('search', SubmitType::class)
+        // ->add('save',   ButtonType::class)
+        // ->add('cancel', ButtonType::class)
         ;
     }
 
