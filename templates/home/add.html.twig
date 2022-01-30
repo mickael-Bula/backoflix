@@ -26,8 +26,9 @@
                 <div class="d-inline-flex">
                     {% if movie is defined and movie is not null %}
 
-                    <div class="pe-4"><a href="{{ path('save') }}"><button class="btn btn-primary">Enregistrer</button></a></div>
-                    <div><a href="{{ path('add') }}"><button class="btn btn-danger">Annuler</button></a></div>
+                    {# on ne peut pas utiliser de tag <button> qui a une action submit() par défaut qui nous redirigerait vers la page du formulaire #}
+                    <div class="pe-4"><a href="{{ path('save') }}"><span class="btn btn-primary">Enregistrer</span></a></div>
+                    <div><a href="{{ path('add') }}"><span class="btn btn-danger">Annuler</span></a></div>
 
                     {% else %}
 

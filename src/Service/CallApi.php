@@ -16,8 +16,7 @@ class CallApi
     /**
      * méthode de connection à une Api
      *
-     * @param string $title
-     * 
+     * @param string $title 
      * @return array
      */
     public function getMovieByTitle(string $title): array
