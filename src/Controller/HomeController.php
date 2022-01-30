@@ -48,7 +48,6 @@ class HomeController extends AbstractController
 
                 // on transmet le titre à l'api
                 $movie = $callApi->getMovieByTitle($title);
-                dump($movie);
                 
                 // s'il n'y a pas de film
                 if ($movie['Response'] === 'False')
@@ -58,7 +57,7 @@ class HomeController extends AbstractController
                 }
                 // TODO enregistrer les données en BDD
                 
-                return new Response('le titre a été reconnu');
+                return $this->renderForm('home/add.html.twig', compact('form', 'movie'));
             }
         }
         return $this->renderForm('home/add.html.twig', compact('form'));

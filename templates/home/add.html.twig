@@ -10,22 +10,31 @@
 
 <div class="container">
 
-{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-
-    <div class="my-custom-class-for-errors">
-        {{ form_errors(form) }}
-    </div>
     <div class="row">
-        <div class="col-lg-6">
 
-            {{ form_row(form.title) }}
-            {{ form_widget(form.save, { 'label': 'Ajouter' }) }}
+        <div class="col-6">
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+            <div class="my-custom-class-for-errors">
+                {{ form_errors(form) }}
+            </div>
+
+            <div class="col-lg-6">
+                {{ form_row(form.title) }}
+                {{ form_widget(form.save, { 'label': 'Ajouter' }) }}
+            </div>
+
+            {{ form_end(form) }}
         </div>
 
+        {# si un film est transmis on l'affiche #}
+        {% if movie is defined and movie is not null %}
+
+            {{ include('home/show.html.twig') }}
+
+        {% endif %}
+
     </div>
-
-{{ form_end(form) }}
-
 </div>
 
 {% endblock %}

@@ -1,0 +1,39 @@
+<div class="col-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm bg-white position-relative">
+                    <div class="col-4 movie__poster" style="background-image: url({{ movie.Poster }}); background-size: cover;">
+                        <img src="{{ asset('images/poster-placeholder.png') }}" class="img-fluid">                        
+                    </div>
+                    <div class="col-8 p-4 d-flex flex-column position-static">
+                        <a href="" class="movie__favorite fs-1 my-2 mx-3 link-danger"><i class="bi bi-bookmark-plus"></i></a>
+                        <strong class="d-inline-block mb-2 text-primary">{% for genre in movie.Genre %}{{ genre }} {% endfor %}</strong>
+
+                        <h3 class="mb-1">{{ movie.Title }}</h3>
+
+                        <div class="mb-1 text-muted">{{ movie.Runtime }}</div>
+                        <p><small>{{ movie.Plot }}</small>
+                        </p>
+                        <div class="d-flex" style="color: orange;">
+
+                            {% for i in range(1, movie.imdbRating) %}
+
+                            {# tant que i est inférieur au rating on ajoute une étoile #}
+                            {% if i <= movie.imdbRating %}
+                            <i class="bi bi-star-fill"></i>
+                            
+                            {% endif %}
+
+                            {# si on est entre 0 et 1 on teste la valeur #}
+                            {% if movie.imdbRating - i < 1 and movie.imdbRating - i >= 0.5 %}
+                            <i class="bi bi-star-half"></i>
+                            {% endif %}
+
+                            {% endfor %}
+                            
+                            <span class="ps-1">{{ movie.imdbRating }}</span>
+                        </div>
+                        <a href="" class="fs-1 mt-3 text-danger align-self-start">
+                            <i class="bi bi-arrow-right-square"></i>
+                        </a>
+                    </div>
+                </div>
+        </div>
