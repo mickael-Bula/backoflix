@@ -1,7 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ajout d'un film{% endblock %}
+{% block title %}Ajouter un film{% endblock %}
 
 {% block body %}
-<h2>Page d'ajout d'un film</h2>
+
+<div class="container">
+    <h2 class="row m-md-5 text-center">Formulaire pour ajouter un film ou une série</h2>
+</div>
+
+<div class="container">
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+
+            {{ form_row(form.title) }}
+            {{ form_widget(form.save, { 'label': 'Ajouter' }) }}
+        </div>
+
+    </div>
+
+{{ form_end(form) }}
+
+</div>
+
 {% endblock %}
