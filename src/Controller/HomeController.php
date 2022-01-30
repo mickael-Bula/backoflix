@@ -7,9 +7,16 @@ use App\Service\CallApi;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\{ Request, Response };
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class HomeController extends AbstractController
 {
+    private $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
     /**
      * route qui affiche la liste des films de la BDD
      * 
@@ -56,6 +63,7 @@ class HomeController extends AbstractController
                     return new Response('erreur lors de la soumission du titre');
                 }
                 // on met l'objet Movie en session (l'enregistrement est différé)
+                $this->session->set('movie', $movie);
                 
                 return $this->renderForm('home/add.html.twig', compact('form', 'movie'));
             }
@@ -66,5 +74,15 @@ class HomeController extends AbstractController
     public function save()
     {
         // si on arrive ici c'est que l'on veut enregistrer le film dans la session
+        $movie = $this->session->get('movie');
+
+        // on prépare l'insertion en BDD
+
+
+        // on supprime l'objet movie de la session
+        $this->session->remove('movie');
+
+        // on redirige vers la page de recherche
+        $this->redirectToRoute('add');
     }
 }
