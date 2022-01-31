@@ -1,7 +1,50 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
 {% block title %}liste des films{% endblock %}
 
 {% block body %}
-<h2>liste des films</h2>
+
+<div class="container my-4">
+        <a href="{{ path('add') }}" class="btn btn-success float-end">Ajouter</a>
+        <h2>Liste des films</h2>
+        <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Synopsis</th>
+                    <th scope="col">date de publication</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            {% for movie in movies %}
+                <tr>
+                    <th scope="row">{{ movie.id }}</th>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.synopsis }}...</td>
+                    <td>{{ movie.releasedDate|date('d/m/Y') }}</td>
+                    <td class="text-end">
+                        <a href="{{ path('update', { "id": movie.id }) }}" class="btn btn-sm btn-warning">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                        <!-- Example single danger button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-danger dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ path('remove', { "id": movie.id }) }}">Oui, je veux supprimer</a>
+                                <a class="dropdown-item" href="{{ path('list') }}" data-toggle="dropdown">Oups !</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
 {% endblock %}

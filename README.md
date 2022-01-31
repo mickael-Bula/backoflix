@@ -47,7 +47,7 @@ php -S localhost:8080 -t public
 
 ## charger les données des films
 
-Sur la page `/movie/add` il te suffit de saisir un titre de film (**in english please !**) pour que celui-ci s'affiche (s'il existe bien sûr :wink:).
+Sur la page `/add` il te suffit de saisir un titre de film (**in english please !**) pour que celui-ci s'affiche (s'il existe bien sûr :wink:).
 
 Si le titre te plaît tu peux cliquer sur le bouton `ajouter` et l'appli se charge de tout le reste !
 

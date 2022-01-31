@@ -6,6 +6,7 @@ use App\Util\Util;
 use App\Form\VideoType;
 use App\Service\CallApi;
 use App\Entity\{ Movie, Actor, Genre, Season };
+use App\Repository\MovieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\{ Request, Response };
@@ -28,11 +29,11 @@ class HomeController extends AbstractController
      * 
      * @return Response
      */
-    public function list(): Response
+    public function list(MovieRepository $movieRepository): Response
     {
-        // TODO créer le template pour afficher la liste des films depuis la BDD
+        $movies = $movieRepository->findAll();
 
-        return $this->render('home/list.html.twig');
+        return $this->render('home/list.html.twig', compact('movies'));
     }
 
     /**
@@ -160,5 +161,45 @@ class HomeController extends AbstractController
 
         // on redirige vers la page de recherche
         return $this->redirectToRoute('add');
+    }
+
+    /**
+     * @Route("/remove/{id}", name="remove", requirements={"id": "\d+"})
+     * 
+     * @param int $id
+     */
+    public function removePost(EntityManagerInterface $entityManager, movieRepository $movieRepository, int $id): Response
+    {
+        $movie = $movieRepository->find($id);
+
+        // cette fois on passe directement par le service EntityManagerInterface qui renvoie une instance de ManagerRegistry::getManager()
+        $entityManager->remove($movie);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('list');
+    }
+
+    /**
+     * @Route("update/{id}", name="update", requirements={"id":"\d+"})
+     * 
+     * @param int $id
+     * 
+     * @return Response
+     */
+    public function update(EntityManagerInterface $entityManager, MovieRepository $movieRepository, int $id)
+    {
+        // on récupère notre post
+        $movie = $movieRepository->find($id);
+
+        // TODO créer le formulaire pour modifier un film
+        // on le modifie
+        $movie->setTitle("The Matrix");
+
+        // on exécute la requête directement car l'objet à modifier est déjà connu de l'Entity Manager
+        $entityManager->flush();
+
+        // on redirige vers la page du post modifié
+        return $this->redirectToRoute('list', compact('id'));
     }
 }
